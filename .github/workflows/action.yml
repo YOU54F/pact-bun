@@ -53,10 +53,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: Vampire/setup-wsl@v1
-        with:
-            additional-packages:
-                curl
-                unzip
+      - run: apt update && apt install -y curl unzip
       - run: |
           curl -fsSL https://bun.sh/install | bash
           export BUN_INSTALL="/root/.bun"
