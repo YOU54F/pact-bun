@@ -57,7 +57,10 @@ jobs:
       #     echo "BUN_INSTALL=$HOME/.bun" >> $GITHUB_ENV
       #     echo "$HOME/.bun/bin" >> $GITHUB_PATH
       - run: apt update && apt install -y curl unzip
-      - run: curl -fsSL https://deno.land/x/install/install.sh | sh
+      - run: |
+          curl -fsSL https://deno.land/x/install/install.sh | sh
+          echo "DENO_INSTALL=$HOME/.deno" >> $GITHUB_ENV
+          echo "$HOME/.deno/bin" >> $GITHUB_ENV
       - run: deno run -A --unstable https://deno.land/x/pact/src/downloadFfi.ts --run
       - run: curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-plugins/main/scripts/install-plugin-cli.sh | bash
       - run: /home/runner/bin/pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
