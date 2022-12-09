@@ -9,7 +9,7 @@
   <br />
 </p>
 
-Try out Pact-Bun in your browser, via our [interactive tutorial](https://killercoda.com/deno-pact/course/tutorials/pact-bun)
+Try out Pact-Bun in your browser, via our [interactive tutorial](https://killercoda.com/pact-bun/course/tutorials/pact-bun)
 
 ## Pre-Reqs
 
