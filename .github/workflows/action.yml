@@ -65,7 +65,7 @@ jobs:
           deno --version
       - run: /root/.deno/bin/deno run -A --unstable https://deno.land/x/pact/src/downloadFfi.ts --run
       - run: curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-plugins/main/scripts/install-plugin-cli.sh | bash
-      - run: /home/bin/pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
+      - run: /root/bin/pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
       #   if: runner.os == 'Linux'
       # - run: /Users/runner/bin/pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
       #   if: runner.os == 'macOS'
