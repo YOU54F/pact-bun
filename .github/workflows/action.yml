@@ -9,7 +9,6 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        # No bun on windows
         os: [ubuntu-latest, macos-latest]
       fail-fast: false
     runs-on: ${{ matrix.os }}
@@ -18,8 +17,6 @@ jobs:
         shell: bash
     steps:
       - uses: actions/checkout@v3
-      # - if: runner.os == 'macOS'
-      #   run: brew install protobuf
       - run: |
           curl -fsSL https://bun.sh/install | bash
           echo "BUN_INSTALL=$HOME/.bun" >> $GITHUB_ENV
@@ -31,12 +28,8 @@ jobs:
       - run: deno run -A --unstable https://deno.land/x/pact/src/downloadFfi.ts --run
       - run: |
           curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-plugins/main/scripts/install-plugin-cli.sh | bash
-          echo $HOME
           echo "$HOME/bin" >> $GITHUB_PATH
       - run: pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
-      #   if: runner.os == 'Linux'
-      # - run: /Users/runner/bin/pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
-      #   if: runner.os == 'macOS'
       - run: bun install
       - run: bun run src/http.consumer.test.ts
       - run: bun run src/grpc.consumer.test.ts
