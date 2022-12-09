@@ -9,7 +9,7 @@ import {
 
 const Pact = loadPactFfi(libraryLocation);
 Pact.pactffi_logger_init();
-Pact.pactffi_logger_attach_sink(cstr("stdout"), LevelFilter.LevelFilter_Info);
+Pact.pactffi_logger_attach_sink(cstr("stdout"), LevelFilter.LevelFilter_Trace);
 Pact.pactffi_logger_apply();
 cstr("pact-bun"),
   cstr("INFO"),

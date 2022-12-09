@@ -1379,10 +1379,10 @@ export namespace PactFfi {
   /** /data/input/pact.h#L2146 */
   export declare function pactffi_create_mock_server_for_transport(
     pact: PactFfi.PactHandle,
-    addr: Pointer<number>,
+    addr: number,
     port: PactFfi.uint16_t,
-    transport: Pointer<number>,
-    transport_config: Pointer<number>,
+    transport: number,
+    transport_config: number
   ): PactFfi.int32_t;
 
   /** /data/input/pact.h#L2158 */
