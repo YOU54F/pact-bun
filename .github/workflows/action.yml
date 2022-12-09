@@ -31,7 +31,7 @@ jobs:
       - run: curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-plugins/main/scripts/install-plugin-cli.sh | bash
       - run: /home/runner/bin/pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
         if: runner.os == 'Linux'
-      - run: PATH_TO_CLI=/Users/runner/bin/pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
+      - run: /Users/runner/bin/pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
         if: runner.os == 'macOS'
       - run: bun install
       - run: bun run src/http.consumer.test.ts
