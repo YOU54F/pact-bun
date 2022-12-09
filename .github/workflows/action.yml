@@ -43,19 +43,23 @@ jobs:
     defaults:
       run:
         shell: wsl-bash {0}
+    env:
+      DENO_INSTALL: /root/.deno
+      BUN_INSTALL: /root/.bun
+      PATH: /root/.deno/bin;/root/.bun/bin:$PATH
     steps:
       - uses: actions/checkout@v3
       - uses: Vampire/setup-wsl@v1
       - run: apt update && apt install -y curl unzip
       - run: |
           curl -fsSL https://bun.sh/install | bash
-          export BUN_INSTALL="/root/.bun"
-          export PATH="/root/.bun/bin:$PATH"
+          # export BUN_INSTALL="/root/.bun"
+          # export PATH="/root/.bun/bin:$PATH"
           bun --version
       - run: |
           curl -fsSL https://deno.land/x/install/install.sh | sh
-          export DENO_INSTALL="/root/.deno"
-          export PATH="/root/.deno/bin:$PATH"
+          # export DENO_INSTALL="/root/.deno"
+          # export PATH="/root/.deno/bin:$PATH"
           deno --version
       - run: /root/.deno/bin/deno run -A --unstable https://deno.land/x/pact/src/downloadFfi.ts --run
       - run: curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-plugins/main/scripts/install-plugin-cli.sh | bash
