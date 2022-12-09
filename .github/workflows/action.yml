@@ -50,6 +50,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: Vampire/setup-wsl@v1
+      - run: apt update && apt install -y curl unzip
       # - if: runner.os == 'Windows'
       #   run: choco install protobuf
       - run: |
@@ -57,7 +58,6 @@ jobs:
           export BUN_INSTALL="/root/.bun"
           export PATH="/root/.bun/bin:$PATH"
           bun --version
-      - run: apt update && apt install -y curl unzip
       - run: |
           curl -fsSL https://deno.land/x/install/install.sh | sh
           export DENO_INSTALL="/root/.deno"
