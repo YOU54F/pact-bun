@@ -499,16 +499,16 @@ export namespace PactFfi {
   export type __compar_fn_t = FnPointer<"__compar_fn_t">;
 
   /** /data/input/pact.h#L47 */
-  export type ExpressionValueType = PactFfi.ExpressionValueType;
+  export type ExpressionValueTypeType = PactFfi.ExpressionValueType;
 
   /** /data/input/pact.h#L61 */
-  export type InteractionPart = PactFfi.InteractionPart;
+  export type InteractionPartType = PactFfi.InteractionPart;
 
   /** /data/input/pact.h#L76 */
-  export type LevelFilter = PactFfi.LevelFilter;
+  export type LevelFilterType = PactFfi.LevelFilter;
 
   /** /data/input/pact.h#L106 */
-  export type PactSpecification = PactFfi.PactSpecification;
+  export type PactSpecificationType = PactFfi.PactSpecification;
 
   /** /data/input/pact.h#L111 */
   export type Consumer = StructPointer<"Consumer">;
@@ -592,7 +592,7 @@ export namespace PactFfi {
   export type ProviderStateParamPair = StructPointer<"ProviderStateParamPair">;
 
   /** /data/input/pact.h#L324 */
-  export type MatchingRuleResult_Tag = PactFfi.MatchingRuleResult_Tag;
+  export type MatchingRuleResultTagType = PactFfi.MatchingRuleResult_Tag;
 
   /** /data/input/pact.h#L330 */
   export type MatchingRuleResult_MatchingRule_Body = StructPointer<"MatchingRuleResult_MatchingRule_Body">;
@@ -604,7 +604,7 @@ export namespace PactFfi {
   export type PactHandle = PactFfi.uint16_t;
 
   /** /data/input/pact.h#L359 */
-  export type StringResult_Tag = PactFfi.StringResult_Tag;
+  export type StringResult_TagType = PactFfi.StringResult_Tag;
 
   /** /data/input/pact.h#L371 */
   export type StringResult = StructPointer<"StringResult">;

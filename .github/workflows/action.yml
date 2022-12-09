@@ -32,8 +32,14 @@ jobs:
       - run: pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
       - run: bun install
       - run: bun run src/http.consumer.raw.test.ts
+        if: always
       - run: bun run src/grpc.consumer.raw.test.ts
+        if: always
       - run: bun run src/http.consumer.test.ts
+        if: always
+      - run: bun run src/grpc.consumer.test.ts
+        if: always
+
   bun_win:
     timeout-minutes: 10
     strategy:
@@ -72,5 +78,10 @@ jobs:
       - run: /root/bin/pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
       - run: /root/.bun/bin/bun install
       - run: /root/.bun/bin/bun run src/http.raw.consumer.test.ts
+        if: always
       - run: /root/.bun/bin/bun run src/grpc.raw.consumer.test.ts
+        if: always
       - run: /root/.bun/bin/bun run src/http.consumer.test.ts
+        if: always
+      - run: /root/.bun/bin/bun run src/grpc.consumer.test.ts
+        if: always
