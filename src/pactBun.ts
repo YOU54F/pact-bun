@@ -796,7 +796,7 @@ export class PactBun {
     transport: string,
     address = "0.0.0.0",
     port = 0,
-    transportOptions: 0 | any = 0
+    transportOptions: string = ''
   ) {
     if (this.pact) {
       console.debug("🚧 creating createMockServerForTransport");
@@ -806,7 +806,7 @@ export class PactBun {
         cstr(address),
         port,
         cstr(transport),
-        transportOptions
+        cstr(transportOptions)
       );
     }
     return this;
