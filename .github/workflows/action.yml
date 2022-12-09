@@ -36,3 +36,35 @@ jobs:
       - run: bun install
       - run: bun run src/http.consumer.test.ts
       - run: bun run src/grpc.consumer.test.ts
+  bun_win:
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        # No bun on windows
+        os: [ubuntu-latest, macos-latest]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: wsl-bash {0}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: Vampire/setup-wsl@v1
+      - if: runner.os == 'Windows'
+        run: choco install protobuf
+      # - run: |
+      #     curl -fsSL https://bun.sh/install | bash
+      #     echo "BUN_INSTALL=$HOME/.bun" >> $GITHUB_ENV
+      #     echo "$HOME/.bun/bin" >> $GITHUB_PATH
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      - run: deno run -A --unstable https://deno.land/x/pact/src/downloadFfi.ts --run
+      - run: curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-plugins/main/scripts/install-plugin-cli.sh | bash
+      - run: /home/runner/bin/pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
+      #   if: runner.os == 'Linux'
+      # - run: /Users/runner/bin/pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
+      #   if: runner.os == 'macOS'
+      - run: bun install
+      - run: bun run src/http.consumer.test.ts
+      - run: bun run src/grpc.consumer.test.ts
