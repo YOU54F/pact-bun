@@ -1,9 +1,9 @@
-import { cstr, loadPactFfi, libraryLocation } from "./lib/mod";
+import { cstr, loadPactFfi, libraryLocation,LevelFilter } from "./lib/mod";
 const Pact = loadPactFfi(libraryLocation);
 
 
 Pact.pactffi_logger_init();
-Pact.pactffi_logger_attach_sink(cstr("stdout"), 3);
+Pact.pactffi_logger_attach_sink(cstr("stdout"), LevelFilter.LevelFilter_Trace);
 Pact.pactffi_logger_apply();
 Pact.pactffi_log_message(
   cstr("pact-bun"),

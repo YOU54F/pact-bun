@@ -4,7 +4,7 @@ const expected = "That is some good Mallory.";
 
 const pact = new PactBun();
 await pact
-  .setupLoggers(Pact.LevelFilter.LevelFilter_Info)
+  .setupLoggers(Pact.LevelFilter.LevelFilter_Trace)
   // Arrange
   .newPact("pact-bun", "Alice-Service")
   .addMetaDataToPact(pact.getPactFfiVersion())
