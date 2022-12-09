@@ -11,7 +11,7 @@ const Pact = loadPactFfi(libraryLocation);
 Pact.pactffi_logger_init();
 Pact.pactffi_logger_attach_sink(cstr("stdout"), LevelFilter.LevelFilter_Info);
 Pact.pactffi_logger_apply();
-cstr("pact-bun-ffi"),
+cstr("pact-bun"),
   cstr("INFO"),
   cstr(`hello from ffi version: ${Pact.pactffi_version()}`);
 const PactTestGrpc = async () => {
@@ -35,7 +35,7 @@ const PactTestGrpc = async () => {
   console.log("pact");
   console.log(pact);
   Pact.pactffi_log_message(
-    cstr("pact-bun-ffi"),
+    cstr("pact-bun"),
     cstr("INFO"),
     cstr(`pactffi_new_pact: ${pact})`)
   );
@@ -54,7 +54,7 @@ const PactTestGrpc = async () => {
   console.log("message_pact");
   console.log(message_pact);
   Pact.pactffi_log_message(
-    cstr("pact-bun-ffi"),
+    cstr("pact-bun"),
     cstr("INFO"),
     cstr(`pactffi_new_sync_message_interaction: ${message_pact}`)
   );
@@ -93,7 +93,7 @@ const PactTestGrpc = async () => {
   console.log("mock_server_port");
   console.log(mock_server_port);
   Pact.pactffi_log_message(
-    cstr("pact-bun-ffi"),
+    cstr("pact-bun"),
     cstr("INFO"),
     cstr(`pactffi_create_mock_server_for_transport: ${mock_server_port}`)
   );
@@ -104,7 +104,7 @@ const PactTestGrpc = async () => {
 
   const matched = Pact.pactffi_mock_server_matched(mock_server_port);
   Pact.pactffi_log_message(
-    cstr("pact-bun-ffi"),
+    cstr("pact-bun"),
     cstr("INFO"),
     cstr(`pactffi_mock_server_matched: ${matched}`)
   );
@@ -123,7 +123,7 @@ const PactTestGrpc = async () => {
       0
     );
     Pact.pactffi_log_message(
-      cstr("pact-bun-ffi"),
+      cstr("pact-bun"),
       cstr("INFO"),
       cstr(`pactffi_write_pact_file: ${res_write_pact}`)
     );
@@ -132,7 +132,7 @@ const PactTestGrpc = async () => {
   const pactffi_cleanup_mock_server_result =
     Pact.pactffi_cleanup_mock_server(mock_server_port);
   Pact.pactffi_log_message(
-    cstr("pact-bun-ffi"),
+    cstr("pact-bun"),
     cstr("INFO"),
     cstr(`pactffi_cleanup_mock_server: ${pactffi_cleanup_mock_server_result}`)
   );

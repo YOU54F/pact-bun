@@ -169,3 +169,4 @@ dist
 .pnp.\*
 bun.lockb
 node_modules.bun
+pacts

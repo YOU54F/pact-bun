@@ -36,7 +36,7 @@ console.log("Hello via Bun!",Pact.pactffi_version());
 Pact.pactffi_logger_init();
 Pact.pactffi_logger_attach_sink(cstr("stdout"), LevelFilter.LevelFilter_Info);
 Pact.pactffi_logger_apply();
-Pact.pactffi_log_message(cstr("pact-bun-ffi"),
+Pact.pactffi_log_message(cstr("pact-bun"),
   cstr("INFO"),
   cstr(`hello from ffi version: ${Pact.pactffi_version()}`));
 

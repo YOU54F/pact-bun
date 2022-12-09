@@ -1388,7 +1388,7 @@ export namespace PactFfi {
   /** /data/input/pact.h#L2158 */
   export declare function pactffi_mock_server_matched(
     mock_server_port: PactFfi.int32_t,
-  ): number;
+  ): boolean;
 
   /** /data/input/pact.h#L2175 */
   export declare function pactffi_mock_server_mismatches(
