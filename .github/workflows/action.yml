@@ -43,10 +43,10 @@ jobs:
     defaults:
       run:
         shell: wsl-bash {0}
-    env:
-      DENO_INSTALL: /root/.deno
-      BUN_INSTALL: /root/.bun
-      PATH: /root/.deno/bin:/root/.bun/bin:$PATH
+    # env:
+    #   DENO_INSTALL: /root/.deno
+    #   BUN_INSTALL: /root/.bun
+    #   PATH: /root/.deno/bin:/root/.bun/bin:$PATH
     steps:
       - uses: actions/checkout@v3
       - uses: Vampire/setup-wsl@v1
