@@ -59,8 +59,8 @@ jobs:
       - run: apt update && apt install -y curl unzip
       - run: |
           curl -fsSL https://deno.land/x/install/install.sh | sh
-          echo "DENO_INSTALL=$HOME/.deno" >> $GITHUB_ENV
-          echo "$HOME/.deno/bin" >> $GITHUB_PATH
+          export DENO_INSTALL="/root/.deno"
+          export PATH="$DENO_INSTALL/bin:$PATH"
       - run: deno run -A --unstable https://deno.land/x/pact/src/downloadFfi.ts --run
       - run: curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-plugins/main/scripts/install-plugin-cli.sh | bash
       - run: /home/runner/bin/pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
