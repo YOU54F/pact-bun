@@ -9,7 +9,6 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        # No bun on windows
         os: [ubuntu-latest, macos-latest]
       fail-fast: false
     runs-on: ${{ matrix.os }}
@@ -18,21 +17,71 @@ jobs:
         shell: bash
     steps:
       - uses: actions/checkout@v3
-      - if: runner.os == 'macOS'
-        run: brew install protobuf
       - run: |
           curl -fsSL https://bun.sh/install | bash
           echo "BUN_INSTALL=$HOME/.bun" >> $GITHUB_ENV
           echo "$HOME/.bun/bin" >> $GITHUB_PATH
-      - uses: denoland/setup-deno@v1
-        with:
-          deno-version: v1.x
+      - run: |
+          curl -fsSL https://deno.land/x/install/install.sh | sh
+          echo "DENO_INSTALL=$HOME/.deno" >> $GITHUB_ENV
+          echo "$HOME/.deno/bin" >> $GITHUB_PATH
       - run: deno run -A --unstable https://deno.land/x/pact/src/downloadFfi.ts --run
-      - run: curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-plugins/main/scripts/install-plugin-cli.sh | bash
-      - run: /home/runner/bin/pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
-        if: runner.os == 'Linux'
-      - run: /Users/runner/bin/pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
-        if: runner.os == 'macOS'
+      - run: |
+          curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-plugins/main/scripts/install-plugin-cli.sh | bash
+          echo "$HOME/bin" >> $GITHUB_PATH
+      - run: pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
       - run: bun install
+      - run: bun run src/http.consumer.raw.test.ts
+        if: always()
+      - run: bun run src/grpc.consumer.raw.test.ts
+        if: always()
       - run: bun run src/http.consumer.test.ts
+        if: always()
       - run: bun run src/grpc.consumer.test.ts
+        if: always()
+
+  bun_win:
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        os: [windows-latest]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: wsl-bash {0}
+    # env:
+    #   DENO_INSTALL: /root/.deno
+    #   BUN_INSTALL: /root/.bun
+    #   PATH: /root/.deno/bin:/root/.bun/bin:$PATH
+    steps:
+      - uses: actions/checkout@v3
+      - uses: Vampire/setup-wsl@v1
+      - run: apt update && apt install -y curl unzip
+      - run: |
+          curl -fsSL https://bun.sh/install | bash
+          export BUN_INSTALL="/root/.bun"
+          export PATH="/root/.bun/bin:$PATH"
+          # echo "BUN_INSTALL=$HOME/.bun" >> $GITHUB_ENV
+          # echo "$HOME/.bun/bin" >> $GITHUB_PATH
+          echo $HOME
+          bun --version
+      - run: |
+          curl -fsSL https://deno.land/x/install/install.sh | sh
+          export DENO_INSTALL="/root/.deno"
+          export PATH="/root/.deno/bin:$PATH"
+          # echo "DENO_INSTALL=$HOME/.deno" >> $GITHUB_ENV
+          # echo "$HOME/.deno/bin" >> $GITHUB_PATH
+          deno --version
+      - run: /root/.deno/bin/deno run -A --unstable https://deno.land/x/pact/src/downloadFfi.ts --run
+      - run: curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-plugins/main/scripts/install-plugin-cli.sh | bash
+      - run: /root/bin/pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
+      - run: /root/.bun/bin/bun install
+      - run: /root/.bun/bin/bun run src/http.raw.consumer.test.ts
+        if: always()
+      - run: /root/.bun/bin/bun run src/grpc.raw.consumer.test.ts
+        if: always()
+      - run: /root/.bun/bin/bun run src/http.consumer.test.ts
+        if: always()
+      - run: /root/.bun/bin/bun run src/grpc.consumer.test.ts
+        if: always()
