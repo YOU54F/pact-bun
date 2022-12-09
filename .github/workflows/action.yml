@@ -55,11 +55,13 @@ jobs:
           curl -fsSL https://bun.sh/install | bash
           # export BUN_INSTALL="/root/.bun"
           # export PATH="/root/.bun/bin:$PATH"
+          echo $HOME
           bun --version
       - run: |
           curl -fsSL https://deno.land/x/install/install.sh | sh
           # export DENO_INSTALL="/root/.deno"
           # export PATH="/root/.deno/bin:$PATH"
+          echo $HOME
           deno --version
       - run: /root/.deno/bin/deno run -A --unstable https://deno.land/x/pact/src/downloadFfi.ts --run
       - run: curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-plugins/main/scripts/install-plugin-cli.sh | bash
