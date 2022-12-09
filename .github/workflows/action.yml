@@ -31,8 +31,9 @@ jobs:
           echo "$HOME/bin" >> $GITHUB_PATH
       - run: pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
       - run: bun install
+      - run: bun run src/http.consumer.raw.test.ts
+      - run: bun run src/grpc.consumer.raw.test.ts
       - run: bun run src/http.consumer.test.ts
-      - run: bun run src/grpc.consumer.test.ts
   bun_win:
     timeout-minutes: 10
     strategy:
@@ -70,5 +71,6 @@ jobs:
       - run: curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-plugins/main/scripts/install-plugin-cli.sh | bash
       - run: /root/bin/pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest
       - run: /root/.bun/bin/bun install
+      - run: /root/.bun/bin/bun run src/http.raw.consumer.test.ts
+      - run: /root/.bun/bin/bun run src/grpc.raw.consumer.test.ts
       - run: /root/.bun/bin/bun run src/http.consumer.test.ts
-      - run: /root/.bun/bin/bun run src/grpc.consumer.test.ts
