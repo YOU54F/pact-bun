@@ -41,7 +41,7 @@ jobs:
     strategy:
       matrix:
         # No bun on windows
-        os: [ubuntu-latest, macos-latest]
+        os: [windows-latest]
       fail-fast: false
     runs-on: ${{ matrix.os }}
     defaults:
