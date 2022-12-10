@@ -46,7 +46,7 @@ console.log(pact.getPactFfiVersion());
 1. `cd pact-bun`{{exec}}
 1. `bun install`{{exec}}
 1. `curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-plugins/main/scripts/install-plugin-cli.sh | bash`{{exec}}
-1. `export PATH="/root/bin/:$PATH"' >> ~/.bashrc`{{exec}}
+1. `export PATH="/root/bin/:$PATH" >> ~/.bashrc`{{exec}}
 1. `source ~/.bashrc`{{exec}}
 1. `pact-plugin-cli -y install https://github.com/pactflow/pact-protobuf-plugin/releases/latest`{{exec}}
 
