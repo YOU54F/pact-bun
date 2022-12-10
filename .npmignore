@@ -4,3 +4,5 @@ node_modules.bun
 proto/       
 tsconfig.json   
 bun.lockb
+pacts
+tutorials
