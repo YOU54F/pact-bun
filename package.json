@@ -1,8 +1,8 @@
 {
   "name": "pact-bun",
   "description": "Pact 🔗 Contract Testing for Bun 🥟, Powered by Rust 🦀",
-  "version": "0.0.2",
-  "module": "src/lib/mod.ts",
+  "version": "0.0.3",
+  "module": "src/pactBun.ts",
   "type": "module",
   "devDependencies": {
     "bun-types": "^0.2.0"

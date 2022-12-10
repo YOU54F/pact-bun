@@ -21,7 +21,7 @@
 
 1. `curl -fsSL https://bun.sh/install | bash`{{exec}}
 2. `source ~/.bashrc`{{exec}}
-3. `bun --version`
+3. `bun --version`{{exec}}
 
 
 ## Setup your first project
