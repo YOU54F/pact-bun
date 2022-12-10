@@ -10,12 +10,19 @@
 1. `echo 'export DENO_INSTALL="/root/.deno"' >> ~/.bashrc `{{exec}}
 1. `echo 'export PATH="$DENO_INSTALL/bin:$PATH"' >> ~/.bashrc `{{exec}}
 1. `source ~/.bashrc`{{exec}}
+1. `deno --version`{{exec}}
 
 ## Get the Pact FFI
 
 1. `deno run -A --unstable https://deno.land/x/pact/src/downloadFfi.ts --run`{{exec}}
 
 ## Install Bun
+
+
+1. `curl -fsSL https://bun.sh/install | bash`{{exec}}
+2. `source ~/.bashrc`{{exec}}
+3. `bun --version`
+
 
 ## Setup your first project
 
