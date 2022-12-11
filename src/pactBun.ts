@@ -1,8 +1,9 @@
 import { homedir, platform } from "os";
 import * as path from "path";
-import { cstr, loadPactFfi, Pointer } from "./lib/mod";
+import { cstr, loadPactFfi, Pointer, StructPointer } from "./lib/mod";
 import { PactFfi as Pact } from "./lib/types";
 export { PactFfi as Pact } from "./lib/types";
+import { ptr } from "bun:ffi";
 const DEBUG = process.env.DEBUG;
 // ENABLE/DISABLE Console Logs
 if (!DEBUG) {
@@ -32,7 +33,7 @@ export class PactBun {
   private mockServerPort: number | null;
   private matched: boolean;
   private mismatches: string | null;
-  private verifierHandle: Pact.VerifierHandle | null;
+  private verifierHandle: Pointer<StructPointer<"VerifierHandle">> | null;
   private verificationResult: number | null;
   private verificationResultsJson: any | null;
   private verificationResultsFileName: string;
@@ -475,19 +476,18 @@ export class PactBun {
   private arr2Ptrs(arr: string[]) {
     const buffer = new BigInt64Array(arr.length);
     arr.map((a, i) => {
-      buffer[i] = BigInt(cstr(a));
+      console.log(ptr(cstr(a)));
+      buffer[i] = BigInt(ptr(cstr(a)));
     });
     return buffer as unknown as Pointer<Pointer<number>>;
-    // return Deno.UnsafePointer.of(buffer) as Pointer<Pointer<number>>;
   }
 
   private arrJson2Ptrs(arr: { [key: string]: string | boolean }[]) {
     const buffer = new BigInt64Array(arr.length);
     arr.map((a, i) => {
-      buffer[i] = BigInt(cstr(JSON.stringify(a)));
+      buffer[i] = BigInt(ptr(cstr(JSON.stringify(a))));
     });
     return buffer as unknown as Pointer<Pointer<number>>;
-    // return Deno.UnsafePointer.of(buffer) as Pointer<Pointer<number>>;
   }
 
   // general stuff
@@ -773,14 +773,12 @@ export class PactBun {
     }
     return this;
   }
-  public withQueryParamV2(
-    params: { name: string; value: string }[]
-  ) {
+  public withQueryParamV2(params: { name: string; value: string }[]) {
     if (this.interaction) {
       console.debug("🚧 creating withQueryParamV2");
 
       params.map((param, i) => {
-        console.debug('creating query param',{param,i})
+        console.debug("creating query param", { param, i });
         const res = this.ffi.pactffi_with_query_parameter_v2(
           this.interaction,
           cstr(param.name),
@@ -796,7 +794,7 @@ export class PactBun {
     transport: string,
     address = "0.0.0.0",
     port = 0,
-    transportOptions: string = ''
+    transportOptions: string = ""
   ) {
     if (this.pact) {
       console.debug("🚧 creating createMockServerForTransport");

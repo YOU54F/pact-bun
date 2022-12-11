@@ -18,7 +18,7 @@ namespace Symbols {
 // }
 
 export function cstr(str: string) {
-  return Buffer.from(str + "\0", "utf-8") as unknown as Pointer<number>;
+  return Buffer.from(str + "\0", "utf-8");
 }
 
 // export function readCString(ptr: Pointer<number>): string {

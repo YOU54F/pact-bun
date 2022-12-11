@@ -45,27 +45,12 @@ pact
   })
   // **** Set your publishing opts
 
-//   .verifierSetPublishOptions({
-//     providerVersion,
-//     providerBranch: "main",
-//     providerTags: ["some", "tags", "yo"],
-//     buildUrl: "http://funkyurl.com",
-//   })
-
-
-// 2022-12-09T22:31:34.611225Z  INFO ThreadId(01) pact_ffi: hello from ffi version: 0.3.15 source="pact-deno-ffi"
-// 473 |   }
-// 474 | 
-// 475 |   private arr2Ptrs(arr: string[]) {
-// 476 |     const buffer = new BigInt64Array(arr.length);
-// 477 |     arr.map((a, i) => {
-// 478 |       buffer[i] = BigInt(a);
-//                       ^
-// SyntaxError: Failed to parse String to BigInt
-//       at /Users/saf/dev/ffi_stuff/pact-bun/src/pactBun.ts:478:18
-//       at arr2Ptrs (/Users/saf/dev/ffi_stuff/pact-bun/src/pactBun.ts:477:4)
-//       at verifierSetPublishOptions (/Users/saf/dev/ffi_stuff/pact-bun/src/pactBun.ts:448:8)
-//       at /Users/saf/dev/ffi_stuff/pact-bun/src/verifier.test.ts:48:3
+  .verifierSetPublishOptions({
+    providerVersion,
+    providerBranch: "main",
+    providerTags: ["some", "tags", "yo"],
+    buildUrl: "http://funkyurl.com",
+  })
 
 
 
@@ -73,7 +58,7 @@ pact
 
   // **** You can filter on consumers
 
-  // .verifierSetConsumerFilters({ names: ["area-calculator-consumer"] })
+  .verifierSetConsumerFilters({ names: ["area-calculator-consumer"] })
 
   // **** You can filter on consumers and provider state/no state
   // .verifierSetFilterInfo({
@@ -82,10 +67,10 @@ pact
 
   // **** Various ways to get pact files
 
-  .verifierAddDirectorySource({ pathToDir: pactDir })
-  // .verifierBrokerSource({
-  //   url:"http://localhost:8001"
-  // })
+  // .verifierAddDirectorySource({ pathToDir: pactDir })
+  .verifierBrokerSource({
+    url:"http://localhost:8000"
+  })
 
   // .verifierBrokerSourceWithSelectors({
   //   url: "http://localhost:8001",
