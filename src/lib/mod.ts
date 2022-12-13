@@ -1,7 +1,7 @@
 import { PactFfi } from "./types";
 import { PactFfi_SYMBOLS } from "./symbols";
 export * from "./safe-ffi";
-import { dlopen, FFIType, suffix } from "ffi";
+import { dlopen, FFIType, suffix,  } from "ffi";
 
 export const {
   ExpressionValueType,
